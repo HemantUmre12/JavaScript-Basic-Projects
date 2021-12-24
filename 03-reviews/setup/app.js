@@ -37,3 +37,61 @@ const reviews = [
       "Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ",
   },
 ];
+
+// ! global funtions
+
+const $ = (query) => document.querySelector(query);
+
+// ! variables
+
+const personImage = $("#person-img");
+const author = $("#author");
+const job = $("#job");
+const info = $("#info");
+const prevButton = $(".prev-btn");
+const nextButton = $(".next-btn");
+const randomButton = $(".random-btn");
+
+function displayReview(idx) {
+  const currReview = reviews[idx];
+  personImage.src = currReview.img;
+  author.innerText = currReview.name;
+  job.innerText = currReview.job;
+  info.innerText = currReview.text;
+}
+
+let currentReviewIdx = 0;
+const numberOfReviews = reviews.length;
+
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("loaded");
+  displayReview(0);
+})
+
+nextButton.addEventListener("click", () => {
+  if(currentReviewIdx === numberOfReviews - 1) {
+    currentReviewIdx = 0;
+  }
+  else {
+    currentReviewIdx++;
+  }
+  displayReview(currentReviewIdx);
+})
+
+prevButton.addEventListener("click", () => {
+  if(currentReviewIdx === 0) {
+    currentReviewIdx = numberOfReviews - 1;
+  }
+  else {
+    currentReviewIdx--;
+  }
+  displayReview(currentReviewIdx);
+})
+
+randomButton.addEventListener("click", () => {
+  const idx = Math.floor(Math.random() * numberOfReviews);
+  displayReview(idx);
+})
+
+
+
